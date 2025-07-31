@@ -918,56 +918,6 @@
             });
         }
 
-        // PDF Download functionality
-        function downloadSingleCoupon(index) {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            const coupon = couponData[index];
-            
-            doc.setFontSize(20);
-            doc.text('COUPONSS', 20, 30);
-            
-            doc.setFontSize(16);
-            doc.text(coupon.title, 20, 50);
-            
-            doc.setFontSize(12);
-            const splitDescription = doc.splitTextToSize(coupon.description, 170);
-            doc.text(splitDescription, 20, 70);
-            
-            doc.setFontSize(10);
-            doc.text(coupon.validity, 20, 100);
-            doc.text(`Coupon #${coupon.number}`, 150, 100);
-            
-            doc.save(`coupons-${coupon.number}.pdf`);
-        }
-
-        function downloadAllCoupons() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            couponData.forEach((coupon, index) => {
-                if (index > 0) {
-                    doc.addPage();
-                }
-                
-                doc.setFontSize(20);
-                doc.text('COUPONS', 20, 30);
-                
-                doc.setFontSize(16);
-                doc.text(coupon.title, 20, 50);
-                
-                doc.setFontSize(12);
-                const splitDescription = doc.splitTextToSize(coupon.description, 170);
-                doc.text(splitDescription, 20, 70);
-                
-                doc.setFontSize(10);
-                doc.text(coupon.validity, 20, 100);
-                doc.text(`Coupon #${coupon.number}`, 150, 100);
-            });
-            
-            doc.save('all-coupons.pdf');
-        }
-
         // Initialize page 1 on load
         document.addEventListener('DOMContentLoaded', function() {
             // Auto-start confetti and other animations as needed
